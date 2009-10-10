@@ -1,2 +1,2 @@
-config :redbull, :required => [:sproutcore]
+config :redbull, :required => [:sproutcore, :'sproutcore/designer']
 

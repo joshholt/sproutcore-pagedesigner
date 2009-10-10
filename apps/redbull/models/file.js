@@ -2,7 +2,7 @@
 // Project:   Redbull.File
 // Copyright: ©2009 My Company, Inc.
 // ==========================================================================
-/*globals Redbull */
+/*globals Redbull*/
 require('core');
 /** @class
 
@@ -63,7 +63,10 @@ Redbull.File = SC.Object.extend(
     switch(state){
       case Redbull.BUSY:
       case Redbull.EMPTY:
-        if(body) this.set('body', body);
+        if(body){ 
+          this.set('body', body);
+          this.evalBody();
+        }
         this.set('state', Redbull.READY_CLEAN);
         break;
       case Redbull.READY_CLEAN:
@@ -119,6 +122,37 @@ Redbull.File = SC.Object.extend(
     else{
       this.set('state', Redbull.EMPTY);
     }
+  },
+  
+  evalBody: function(){
+    var bodyText = this.get('body'), body, designs = [];
+    
+   // try{
+      body = eval(bodyText || "");
+      body.set('needsDesigner', YES);
+      this.set('currentDesign', body);
+      for(var v in body){
+        if(body.hasOwnProperty(v)){
+          console.log(body[v]);
+          if(body[v] && body[v].kindOf){
+            if(body[v].kindOf(SC.View)){
+              designs.push(SC.Object.create({type: 'view', view: body.get(v), name: v}));
+            }
+            else if(body[v].kindOf(SC.Page)){
+              designs.push(SC.Object.create({type: 'page', view: body.get(v), name: v}));
+            }
+            else if(body[v].kindOf(SC.Pane)){
+              designs.push(SC.Object.create({type: 'pane', view: body.get(v), name: v}));
+            }
+          }
+        }
+      }
+      this.set('designs', designs);
+      
+    // } catch (exception) {
+    //   console.log("Couldn't eval body...");
+    // }
+    
   }
 
 }) ;

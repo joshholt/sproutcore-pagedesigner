@@ -26,5 +26,9 @@ Redbull = SC.Object.create(
   //called whenever the bespin Editor's content changes
   bespinEditorContentChanged: function(){
     if(this.fileController.get('content')) this.fileController.content.bodyChanged();
-  }
+  },
+  
+  
+  
+  
 }) ;

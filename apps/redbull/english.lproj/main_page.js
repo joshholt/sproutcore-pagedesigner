@@ -13,7 +13,40 @@ Redbull.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'fileList bespin toolBar'.w(),
+    childViews: 'split toolBar'.w(),
+    
+    split: SC.SplitView.design({
+      layout: { left: 0, top: 32, right: 0, bottom: 0 },
+      layoutDirection: SC.LAYOUT_HORIZONTAL,
+      defaultThickness: 0.88, // a number between 0 and 1.0
+      autoresizeBehavior: SC.RESIZE_TOP_LEFT,
+      dividerThickness: 2,
+      topLeftMinThickness: 150,
+    
+      topLeftView: SC.View.design({
+        childViews: 'fileList thumb'.w(),
+        
+        fileList: SC.ScrollView.design({
+          layout: { top: 0, bottom: 32, left: 0, right: 0 },
+          hasHorizontalScroller: NO,
+          contentView: SC.ListView.design({
+            contentValueKey: 'name',
+            contentBinding: 'Redbull.filesController.arrangedObjects',
+            selectionBinding: 'Redbull.filesController.selection'
+         })
+        }), 
+        thumb: SC.ThumbView.design({
+          classNames: 'thumb-view'.w(),
+          layout: { bottom: 0, right: 0, width: 35, height: 30 }
+        })
+        
+      }),
+      
+      bottomRightView: SC.ContainerView.design({
+        nowShowingBinding: 'Redbull.mainPage.pageDesigner'
+      })
+      
+    }),
     
     toolBar: SC.ToolbarView.design(SC.Border, {
       anchorLocation: SC.ANCHOR_TOP,
@@ -34,23 +67,49 @@ Redbull.mainPage = SC.Page.design({
         isEnabledBinding: 'Redbull.fileController.isDirty'
       })
       
-    }),
+    })
     
+  }),
+  
+  bespinEditor: Redbull.BespinView.design({
+    contentBinding: 'Redbull.fileController.content'
+  }),
+  
+  pageDesigner: SC.SplitView.design({
+    layout: { left: 0, top: 0, right: 0, bottom: 0 },
+    layoutDirection: SC.LAYOUT_HORIZONTAL,
+    defaultThickness: 0.25, // a number between 0 and 1.0
+    autoresizeBehavior: SC.RESIZE_TOP_LEFT,
+    dividerThickness: 2,
+  
+    topLeftView: SC.View.design({
+      childViews: 'container viewList'.w(),
+      
+      container: SC.ContainerView.design({
+        layout: {top: 0, left: 0, right: 0, bottom: 50},
+        contentViewBinding:'Redbull.designController.view'
+      }),
+      
+      viewList: SC.GridView.design({
+        layout: {left:0, right: 0, bottom: 0, height: 50},
+        contentBinding: 'Redbull.designsController',
+        selectionBinding: 'Redbull.designsController.selection',
+        contentValueKey: 'name'
+      })
+    }), 
+
+    bottomRightView: SC.View.design({
+      childViews: 'inspector thumb'.w(),
+      
+      inspector: SC.View.design({
+        layout: {right: 0, top: 0, width: 200, bottom:30}
+      }),
+      
+     thumb: SC.ThumbView.design({
+        classNames: 'thumb-view'.w(),
+        layout: { bottom: 0, left: 0, width: 35, height: 30 }
+      })
     
-    fileList: SC.ScrollView.design({
-      layout: { top: 32, bottom: 0, left: 0, width: 238 },
-      hasHorizontalScroller: NO,
-      contentView: SC.ListView.design({
-        contentValueKey: 'name',
-        contentBinding: 'Redbull.filesController.arrangedObjects',
-        selectionBinding: 'Redbull.filesController.selection'
-     })
-    }),
-    
-    bespin: Redbull.BespinView.design({
-      layout: { left: 238, right: 0, top: 32, bottom: 0 },
-      contentBinding: 'Redbull.fileController.content'
     })
   })
-
 });

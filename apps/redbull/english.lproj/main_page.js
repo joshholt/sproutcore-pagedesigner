@@ -3,7 +3,6 @@
 // Copyright: ©2009 Mike Ball
 // ==========================================================================
 /*globals Redbull */
-require('embed');
 require('views/bespin');
 
 // This page describes the main user interface for your application.  
@@ -43,7 +42,7 @@ Redbull.mainPage = SC.Page.design({
       }),
       
       bottomRightView: SC.ContainerView.design({
-        nowShowingBinding: 'Redbull.mainPage.pageDesigner'
+        nowShowingBinding: 'Redbull.editorMode'
       })
       
     }),
@@ -52,7 +51,13 @@ Redbull.mainPage = SC.Page.design({
       anchorLocation: SC.ANCHOR_TOP,
       borderStyle: SC.BORDER_BOTTOM,
 
-      childViews: 'save title'.w(),
+      childViews: 'editorMode save title'.w(),
+      
+      editorMode: SC.SegmentedView.design({
+        layout: {left: 60, top: 4, height: 24, width: 250},
+        items: ['bespinEditor', 'pageDesigner'],
+        valueBinding: 'Redbull.editorMode'
+      }),
       
       title: SC.LabelView.design({
         layout: {centerX: 0, top: 4, height: 24, width: 150},

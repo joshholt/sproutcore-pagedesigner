@@ -2,7 +2,7 @@
 // Project:   Redbull.BespinView
 // Copyright: ©2009 My Company, Inc.
 // ==========================================================================
-/*globals Redbull */
+/*globals Redbull bespin */
 require('core');
 /** @class
 
@@ -17,6 +17,19 @@ Redbull.BespinView = SC.View.extend(
   layerId: "editor",
   
   content: null,
+
+
+  _bv_editor_creator: function(){
+    if(!this.bespinEditor && this.$('').length){
+      this.bespinEditor = new bespin.editor.Component('editor', {
+            language: "js",
+            loadfromdiv: true,
+            set: { tabsize: 2}
+
+      });
+      this.bespinEditor.onchange(function(){this.bespinEditorContentChanged();});
+    }
+  }.observes('isVisibleInWindow'),
   
   _content_changed: function(){
     this._updateEditor();
@@ -27,8 +40,9 @@ Redbull.BespinView = SC.View.extend(
   }.observes('*content.state'),
   
   _updateEditor: function(){
+    console.log('updating editor');
     var c = this.get('content');
-    if(c && c.get('body') && Redbull.bespinEditor) Redbull.bespinEditor.setContent(c.get('body'));
+    if(c && c.get('body') && this.bespinEditor) this.bespinEditor.setContent(c.get('body'));
   }
   
   

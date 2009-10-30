@@ -3,7 +3,7 @@
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
-
+require('core');
 /*
 	This is a compiled version of Dojo, built for deployment and not for
 	development. To get an editable version, please visit:

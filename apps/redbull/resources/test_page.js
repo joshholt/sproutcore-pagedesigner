@@ -14,7 +14,12 @@ Redbull.testPage = SC.Page.design({
     childViews: [
       SC.LabelView.design({
         layout: {top: 0, left:0, width: 100, height: 100},
-        value: 'dork'
+        value: 'dork',
+        target: 'Orion',
+        action: 'dorks',
+        doubleClick: function(e){
+          return YES;
+        }
       })
     ]
   })

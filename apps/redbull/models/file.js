@@ -127,13 +127,12 @@ Redbull.File = SC.Object.extend(
   evalBody: function(){
     var bodyText = this.get('body'), body, designs = [];
     
-   // try{
+   try{
       body = eval(bodyText || "");
       body.set('needsDesigner', YES);
       this.set('currentDesign', body);
       for(var v in body){
         if(body.hasOwnProperty(v)){
-          console.log(body[v]);
           if(body[v] && body[v].kindOf){
             if(body[v].kindOf(SC.View)){
               designs.push(SC.Object.create({type: 'view', view: body.get(v), name: v}));
@@ -149,9 +148,10 @@ Redbull.File = SC.Object.extend(
       }
       this.set('designs', designs);
       
-    // } catch (exception) {
-    //   console.log("Couldn't eval body...");
-    // }
+    } catch (exception) {
+      console.log("Couldn't eval body...");
+      this.set('designs', null);
+    }
     
   }
 

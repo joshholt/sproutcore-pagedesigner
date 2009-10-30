@@ -28,7 +28,7 @@ Redbull = SC.Object.create(
     if(this.fileController.get('content')) this.fileController.content.bodyChanged();
   },
   
-  
+  editorMode: 'pageDesigner'
   
   
 }) ;

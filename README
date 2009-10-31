@@ -1,1 +1,13 @@
-Hello nurse
+Getting Started with Redbull (PageDesigner)
+==============================================================================
+
+
+git clone git://github.com/onkis/sproutcore-abbot.git
+git clone git://github.com/sproutit/sproutcore-pagedesigner.git
+cd sproutcore-pagedesigner
+mkdir frameworks
+git clone git://github.com/onkis/sproutcore.git
+
+to run
+../sproutcore-abbot/bin/sc-server --filesystem
+

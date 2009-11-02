@@ -20,6 +20,7 @@ Redbull.BespinView = SC.View.extend(
 
 
   _bv_editor_creator: function(){
+    console.log('isVisible in window');
     if(!this.bespinEditor && this.$('').length){
       this.bespinEditor = new bespin.editor.Component('editor', {
             language: "js",

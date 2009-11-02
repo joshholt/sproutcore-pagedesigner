@@ -10,6 +10,9 @@
 
   @extends SC.ObjectController
 */
+Redbull.PAGE_DESIGNER = "pageDesigner";
+Redbull.BESPIN = "bespin";
+
 Redbull.fileController = SC.ObjectController.create(
 /** @scope Redbull.fileController.prototype */ {
 
@@ -22,13 +25,70 @@ Redbull.fileController = SC.ObjectController.create(
     if(content.refresh && content.get('isFile')) content.refresh();
   }.observes('content'),
   
-  save: function(){
-    //TODO: some logic to determine which editor is open...
-    var content = this.get('content');
+  state: null,
+  editorMode: '',
+  
+  // ..........................................................
+  // State information
+  // 
+  init: function(){
+    sc_super();
+    this.set('state', Redbull.PAGE_DESIGNER);
+    this.set('editorMode', "pageDesigner");
     
-    if(content){
-     content.set('body',Redbull.bespinEditor.getContent());
-     content.commit(); 
+  },
+  
+  pageDesigner: function(){
+    var state = this.get('state');
+    switch(state){
+      case Redbull.BESPIN:
+        this.set('state', Redbull.PAGE_DESIGNER);
+        this.set('editorMode', "pageDesigner");
+        break;
+      default:
+        console.log("RedBull.fileController#pageDesigner not handled in current state %@".fmt(state));
+        break;
+    }
+  },
+  
+  bespinEditor: function(){
+    var state = this.get('state');
+    switch(state){
+      case Redbull.PAGE_DESIGNER:
+        this.set('state', Redbull.BESPIN);
+        this.set('editorMode', "bespinEditor");
+        break;
+      default:
+        console.log("RedBull.fileController#bespinEditor not handled in current state %@".fmt(state));
+        break;
+    }
+  },
+  
+  save: function(){
+    var state = this.get('state'), content, designContent;
+    switch(state){
+      case Redbull.BESPIN:
+        content = this.get('content');
+        if(content){
+          content.set('body', Redbull.bespinEditor.getContent());
+          content.commit();
+        }
+      
+        break;
+      case Redbull.PAGE_DESIGNER:
+        content = this.get('content');
+        if(content){
+          designContent = this.get('currentDesign');
+          designContent = designContent.emitDesign();
+          content.set('body', designContent);
+          content.bodyChanged();
+          content.commit();
+        }
+        break;
+      default:
+        console.log("RedBull.fileController#save not handled in current state %@".fmt(state));
+      
+        break;
     }
   }
   

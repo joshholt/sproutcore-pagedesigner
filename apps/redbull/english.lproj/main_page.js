@@ -42,7 +42,7 @@ Redbull.mainPage = SC.Page.design({
       }),
       
       bottomRightView: SC.ContainerView.design({
-        nowShowingBinding: 'Redbull.editorMode'
+        nowShowingBinding: 'Redbull.fileController.editorMode'
       })
       
     }),
@@ -55,8 +55,13 @@ Redbull.mainPage = SC.Page.design({
       
       editorMode: SC.SegmentedView.design({
         layout: {left: 60, top: 4, height: 24, width: 250},
-        items: ['bespinEditor', 'pageDesigner'],
-        valueBinding: 'Redbull.editorMode'
+        itemTitleKey: 'title',
+        itemActionKey: 'action',
+        itemTargetKey: 'target',
+        itemValueKey: 'value',
+        items: [{title: 'Bespin Editor', target: Redbull.fileController, action: 'bespinEditor', value: 'bespinEditor'},
+                {title: 'Page Designer', target: Redbull.fileController, action: 'pageDesigner', value: 'pageDesigner'}],
+        valueBinding: 'Redbull.fileController.editorMode'
       }),
       
       title: SC.LabelView.design({
@@ -68,8 +73,8 @@ Redbull.mainPage = SC.Page.design({
         title: 'Save',
         layout: {right: 20, top: 4, width: 100, height: 24},
         target: Redbull.fileController,
-        action: 'save',
-        isEnabledBinding: 'Redbull.fileController.isDirty'
+        action: 'save'
+        //isEnabledBinding: 'Redbull.fileController.isDirty'
       })
       
     })

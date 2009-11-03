@@ -4,8 +4,10 @@ Getting Started with Redbull (PageDesigner)
 
 git clone git://github.com/onkis/sproutcore-abbot.git
 git clone git://github.com/sproutit/sproutcore-pagedesigner.git
+git checkout -b <branch-name> origin/mb/master
 cd sproutcore-pagedesigner
 mkdir frameworks
+cd frameworks
 git clone git://github.com/onkis/sproutcore.git
 
 to run

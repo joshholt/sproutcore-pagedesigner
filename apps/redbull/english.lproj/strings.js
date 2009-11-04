@@ -11,5 +11,17 @@
 // localized string added to this file!
 //
 SC.stringsFor('English', {
-  // "_String Key": "Localized String"
+  
+  // ..........................................................
+  // Inspector Strings
+  // 
+  "_Width:": "Width:",
+  "_Height:": "Height",
+  "_Top:": "Top",
+  "_Left:": "Left:",
+  "_Bottom:": "Bottom:",
+  "_Background Color": "Background Color:",
+  "_Class Names": "Class Names:",
+  "_Right:": "Right:"
+  
 }) ;

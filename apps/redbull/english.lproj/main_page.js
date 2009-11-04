@@ -104,7 +104,8 @@ Redbull.mainPage = SC.Page.design({
         layout: {left:0, right: 0, bottom: 0, height: 50},
         contentBinding: 'Redbull.designsController',
         selectionBinding: 'Redbull.designsController.selection',
-        contentValueKey: 'name'
+        exampleView: Redbull.GridItemView
+        // contentValueKey: 'name'
       })
     }), 
 

@@ -112,7 +112,101 @@ Redbull.mainPage = SC.Page.design({
       childViews: 'inspector thumb'.w(),
       
       inspector: SC.View.design({
-        layout: {right: 0, top: 0, width: 200, bottom:30}
+        layout: {left: 30, top: 0, width: 240, bottom:30},
+        childViews: ['heightLabel', 'heightBox', 'widthLabel', 
+            'widthBox', 'topLabel', 'topBox', 'leftLabel', 'leftBox', 
+            'bottomLabel', 'bottomBox', 'rightLabel', 'rightBox', 
+            'bgColorLabel', 'bgColorBox', 'clsNamesLabel', 'clsNamesBox'],
+            
+        // Top Label
+        topLabel: SC.LabelView.design({
+          layout: { top: 10, left: 5, height: 21, width: 55},
+          value: "_Top:".loc()          
+        }),
+        // Top Edit Box
+        topBox: SC.TextFieldView.design({
+          layout: { top: 35, left: 5, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutTop')
+        }),
+        
+        // Left Label
+        leftLabel: SC.LabelView.design({
+          layout: { top: 10, left: 80, height: 21, width: 55},
+          value: "_Left:".loc()          
+        }),
+        // Left Edit Box
+        leftBox: SC.TextFieldView.design({
+          layout: { top: 35, left: 80, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutLeft')
+        }),
+        
+        // Bottom Label
+        bottomLabel: SC.LabelView.design({
+          layout: { top: 65, left: 5, height: 21, width: 65},
+          value: "_Bottom:".loc()          
+        }),
+        // Bottom Edit Box
+        bottomBox: SC.TextFieldView.design({
+          layout: { top: 95, left: 5, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutBottom')
+        }),
+        
+        // Right Label
+        rightLabel: SC.LabelView.design({
+          layout: { top: 65, left: 80, height: 21, width: 55},
+          value: "_Right:".loc()          
+        }),
+        // Right Edit Box
+        rightBox: SC.TextFieldView.design({
+          layout: { top: 95, left: 80, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutRight')
+        }),
+        
+        // Width Label
+        widthLabel: SC.LabelView.design({
+          layout: { top: 125, left: 5, height: 21, width: 55},
+          value: "_Width:".loc()
+        }),
+        // Width Edit Box
+        widthBox: SC.TextFieldView.design({
+          layout: { top: 155, left: 5, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutWidth')
+        }),
+        
+        // Height Label
+        heightLabel: SC.LabelView.design({
+          layout: { top: 125, left: 80, height: 21, width: 55},
+          value: "_Height:".loc()          
+        }),
+        // Height Edit Box
+        heightBox: SC.TextFieldView.design({
+          layout: { top: 155, left: 80, height: 21, width: 50},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController.layoutHeight')
+        }),
+        
+        // BG Color Label
+        bgColorLabel: SC.LabelView.design({
+          layout: { top: 215, left: 5, height: 21, width: 125},
+          value: "_Background Color:".loc()
+        }),
+        // BG Color Edit Box
+        bgColorBox: SC.TextFieldView.design({
+          layout: { top: 235, left: 5, height: 21, width: 125},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController*content.backgroundColor')
+        }),
+        
+        // Class Names Label
+        clsNamesLabel: SC.LabelView.design({
+          layout: { top: 265, left: 5, height: 21, width: 125},
+          value: "_Class Names:".loc()
+        }),
+        // Class Names Edit Box
+        clsNamesBox: SC.TextFieldView.design({
+          layout: { top: 285, left: 5, height: 75, width: 125},
+          valueBinding: SC.Binding.from('Redbull.viewDesignerController*content.classNames'),
+          isTextArea: YES
+        })
+         
       }),
       
      thumb: SC.ThumbView.design({

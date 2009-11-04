@@ -130,6 +130,7 @@ Redbull.File = SC.Object.extend(
    try{
       body = eval(bodyText || "");
       body.set('needsDesigner', YES);
+      body.set('isContainerView',YES);
       this.set('currentDesign', body);
       for(var v in body){
         if(body.hasOwnProperty(v)){
